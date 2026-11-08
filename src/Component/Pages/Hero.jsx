@@ -1,107 +1,104 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { 
-  FaWhatsapp, 
-  FaRocket, 
-  FaLaptopCode, 
-  FaServer, 
-  FaMobileAlt, 
-  FaCheckCircle 
-} from 'react-icons/fa';
+import { FaWhatsapp, FaArrowLeft, FaCode, FaCheckCircle } from 'react-icons/fa';
 
 const Hero = () => {
-  // رابط الواتساب المباشر
   const whatsappNumber = "201027375220";
-  const whatsappMessage = encodeURIComponent("مرحباً، أرغب في الاستفسار عن خدمات تطوير البرمجيات وبدء مشروع جديد.");
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent("مرحباً Oscar Web Development، أرغب في بدء مشروع جديد وتطوير موقعي.")}`;
 
-  // إعدادات أنيميشن الظهور المتسلسل للعناصر
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15, // تأخير بسيط بين ظهور كل خدمة والثانية
-        delayChildren: 0.3,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, x: 20 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.4, ease: "easeOut" } },
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
-    <section className="text-white min-vh-100 d-flex align-items-center py-5 position-relative overflow-hidden">
-      
-      {/* Full Background Image */}
+    <section 
+      id="hero" 
+      className="text-white min-vh-100 d-flex align-items-center position-relative overflow-hidden pt-5 pb-5"
+      style={{
+        backgroundImage: `url(${import.meta.env.BASE_URL}Oscar.jpeg)`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
+      {/* Dark Overlay لضمان وضوح النصوص وقراءة ممتازة */}
       <div 
         className="position-absolute top-0 start-0 w-100 h-100"
         style={{
-          backgroundImage: `url('/Oscar.jpeg')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center 20%',
-          zIndex: -2,
-        }}
-      />
-      
-      {/* Light Dark Overlay */}
-      <div 
-        className="position-absolute top-0 start-0 w-100 h-100 bg-black"
-        style={{
-          opacity: 0.65,
-          zIndex: -1,
+          background: 'linear-gradient(135deg, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.75) 100%)',
+          zIndex: 1
         }}
       />
 
-      <div className="container py-4">
-        <div className="row align-items-center gy-5">
+      <div className="container position-relative" style={{ zIndex: 2 }}>
+        <div className="row align-items-center justify-content-center text-center text-lg-start gy-5">
           
-          {/* Left Column: Text Content */}
-          <div className="col-lg-7 text-center text-lg-start">
+          {/* Content */}
+          <div className="col-lg-10 mx-auto">
             
-            {/* Tag Badge */}
+            {/* Badge */}
             <motion.div 
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-black bg-opacity-50 border border-primary border-opacity-50 text-primary mb-4 shadow"
-              style={{ backdropFilter: 'blur(6px)' }}
+              className="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-black bg-opacity-75 border border-success border-opacity-50 text-success mb-4 shadow"
+              style={{ backdropFilter: 'blur(8px)' }}
             >
-              <FaRocket size={14} />
-              <span className="small fw-semibold">حلول برمجية متكاملة لنمو أعمالك مع <span className="text-primary">Oscar</span></span>
+              <FaCode size={15} />
+              <span className="small fw-semibold">Oscar Web Development — شريكك الرقمي</span>
             </motion.div>
 
             {/* Main Title */}
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="display-4 fw-bold lh-sm mb-4 text-white"
-              style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="display-4 display-lg-2 fw-bold text-white mb-4 lh-sm"
             >
-              نحول أفكارك الرقمية إلى <span className="text-primary">واقع برمجي</span> احترافي
+              نبتكر ونطور <span className="text-success">أحدث الحلول</span> والمواقع الإلكترونية
             </motion.h1>
 
-            {/* Description */}
+            {/* Subtitle */}
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="lead text-light mb-4"
-              style={{ textShadow: '0 1px 5px rgba(0,0,0,0.8)' }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-white-50 lead fs-5 mb-5 mx-auto"
+              style={{ maxWidth: '750px' }}
             >
-              في شركة <span className="text-primary fw-semibold">Oscar</span> نقدم خدمات تطوير المواقع، الأنظمة، تطبيقات الموبايل، والمنصات الذكية بأعلى كفاءة وأحدث التقنيات لمساعدة شركتك على التوسع والتميز.
+              نحول أفكارك إلى منصات وتطبيقات رقمية سريعة، متجاوبة، ومصممة بأعلى معايير الجودة لرفع كفاءة أعمالك وزيادة أرباحك.
             </motion.p>
 
-            {/* Action Buttons */}
+            {/* Features pills */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="d-flex flex-column flex-sm-row align-items-center justify-content-center justify-content-lg-start gap-3 mb-5"
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="d-flex flex-wrap justify-content-center gap-4 mb-5"
+            >
+              <div className="d-flex align-items-center gap-2 text-white-50 small bg-dark bg-opacity-50 px-3 py-2 rounded-pill border border-secondary border-opacity-25">
+                <FaCheckCircle className="text-success" />
+                <span>تصميم متجاوب 100%</span>
+              </div>
+              <div className="d-flex align-items-center gap-2 text-white-50 small bg-dark bg-opacity-50 px-3 py-2 rounded-pill border border-secondary border-opacity-25">
+                <FaCheckCircle className="text-success" />
+                <span>سرعة أداء عالية</span>
+              </div>
+              <div className="d-flex align-items-center gap-2 text-white-50 small bg-dark bg-opacity-50 px-3 py-2 rounded-pill border border-secondary border-opacity-25">
+                <FaCheckCircle className="text-success" />
+                <span>دعم فني مستمر</span>
+              </div>
+            </motion.div>
+
+            {/* CTA Buttons */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="d-flex flex-wrap align-items-center justify-content-center gap-3"
             >
               <motion.a 
                 whileHover={{ scale: 1.05 }}
@@ -109,121 +106,23 @@ const Hero = () => {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-success bg-primary border-0 px-4 py-3 rounded-pill fw-semibold d-inline-flex align-items-center gap-2 shadow-lg w-100 w-sm-auto justify-content-center"
+                className="btn btn-success bg-gradient px-4 py-3 rounded-pill fw-semibold text-white d-flex align-items-center gap-2 shadow fs-6"
               >
                 <FaWhatsapp size={20} />
-                <span>ابدأ مشروعك الآن</span>
+                <span>ابدأ مشروعك الآن عبر الواتساب</span>
               </motion.a>
 
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="w-100 w-sm-auto">
-                <Link 
-                  to="/projects" 
-                  className="btn btn-outline-light px-4 py-3 rounded-pill fw-semibold border-secondary w-100 text-center bg-black bg-opacity-50"
-                  style={{ backdropFilter: 'blur(5px)' }}
-                >
-                  استكشف أعمالنا
-                </Link>
-              </motion.div>
-            </motion.div>
-
-            {/* Features Checklist */}
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-              className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start gap-4 text-light small"
-            >
-              <div className="d-flex align-items-center gap-2 bg-black bg-opacity-50 px-3 py-1 rounded-pill" style={{ backdropFilter: 'blur(4px)' }}>
-                <FaCheckCircle className="text-primary" />
-                <span>أكواد نظيفة ومستقرة</span>
-              </div>
-              <div className="d-flex align-items-center gap-2 bg-black bg-opacity-50 px-3 py-1 rounded-pill" style={{ backdropFilter: 'blur(4px)' }}>
-                <FaCheckCircle className="text-primary" />
-                <span>تصاميم تجاوبية 100%</span>
-              </div>
-            </motion.div>
-
-          </div>
-
-          {/* Right Column: Quick Services Grid with Advanced Animations */}
-          <div className="col-lg-5">
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9, y: 30 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
-              className="p-4 rounded-4 bg-black bg-opacity-60 border border-secondary border-opacity-50 shadow-lg"
-              style={{ backdropFilter: 'blur(12px)' }}
-            >
-              <motion.h4 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4 }}
-                className="fw-bold mb-3 text-white fs-5 border-bottom border-secondary pb-2"
+              <motion.button 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => scrollToSection('projects')}
+                className="btn btn-outline-light px-4 py-3 rounded-pill fw-semibold d-flex align-items-center gap-2 fs-6"
               >
-                خدماتنا الرئيسية
-              </motion.h4>
-
-              {/* Animated Container for Services Items */}
-              <motion.div 
-                variants={containerVariants}
-                initial="hidden"
-                animate="visible"
-                className="row g-3"
-              >
-                
-                {/* Service 1 */}
-                <motion.div variants={itemVariants} className="col-12">
-                  <motion.div 
-                    whileHover={{ scale: 1.02, x: 5 }}
-                    transition={{ duration: 0.2 }}
-                    className="d-flex align-items-center gap-3 p-2 rounded-3 bg-black bg-opacity-50 border border-secondary border-opacity-25 shadow-sm cursor-pointer"
-                  >
-                    <div className="p-2 bg-primary bg-opacity-25 text-primary rounded-2">
-                      <FaLaptopCode size={20} />
-                    </div>
-                    <div>
-                      <div className="fw-semibold text-white fs-6">تطوير المواقع والمنصات</div>
-                      <small className="text-white-50">مواقع تعريفية، تجارية ومنصات رقمية</small>
-                    </div>
-                  </motion.div>
-                </motion.div>
-
-                {/* Service 2 */}
-                <motion.div variants={itemVariants} className="col-12">
-                  <motion.div 
-                    whileHover={{ scale: 1.02, x: 5 }}
-                    transition={{ duration: 0.2 }}
-                    className="d-flex align-items-center gap-3 p-2 rounded-3 bg-black bg-opacity-50 border border-secondary border-opacity-25 shadow-sm cursor-pointer"
-                  >
-                    <div className="p-2 bg-info bg-opacity-25 text-info rounded-2">
-                      <FaServer size={20} />
-                    </div>
-                    <div>
-                      <div className="fw-semibold text-white fs-6">تطوير الأنظمة (Systems)</div>
-                      <small className="text-white-50">أنظمة إدارية متكاملة للشركات</small>
-                    </div>
-                  </motion.div>
-                </motion.div>
-
-                {/* Service 3 */}
-                <motion.div variants={itemVariants} className="col-12">
-                  <motion.div 
-                    whileHover={{ scale: 1.02, x: 5 }}
-                    transition={{ duration: 0.2 }}
-                    className="d-flex align-items-center gap-3 p-2 rounded-3 bg-black bg-opacity-50 border border-secondary border-opacity-25 shadow-sm cursor-pointer"
-                  >
-                    <div className="p-2 bg-warning bg-opacity-25 text-warning rounded-2">
-                      <FaMobileAlt size={20} />
-                    </div>
-                    <div>
-                      <div className="fw-semibold text-white fs-6">تطبيقات الموبايل والديسك توب</div>
-                      <small className="text-white-50">تطبيقات سريعة ومتوافقة مع جميع الأجهزة</small>
-                    </div>
-                  </motion.div>
-                </motion.div>
-
-              </motion.div>
+                <span>استكشف أعمالنا</span>
+                <FaArrowLeft size={14} />
+              </motion.button>
             </motion.div>
+
           </div>
 
         </div>
